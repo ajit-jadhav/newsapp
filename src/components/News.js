@@ -30,7 +30,7 @@ export class News extends Component {
         }
     }
 
-    undateNews(){(async()=>{
+    updateNews(){(async()=>{
         console.log("undateNews call")
         const url = this.urlBase +`v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=ebcaf9a10c3c4b7d85b2ef6c5dca21a8&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         this.setState({loading: true})
@@ -72,7 +72,7 @@ export class News extends Component {
         //     loading: false
         // })
         this.setState({page: this.state.page - 1 });
-        this.undateNews()
+        this.updateNews()
     }
 
     handleNextClick = async ()=>{
