@@ -10,7 +10,7 @@ export class NewsItem extends Component {
         <div className="card">
             <div style={{ 
                 display: 'flex',
-                justifyContent: 'flex-end',
+                justifyContent: 'flex-end ',
                 position: 'absolute',
                 right: 0
             }
