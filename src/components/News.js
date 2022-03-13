@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import NewsItem from './NewsItem'
 import Spinner from './Spinner';
+import def_img from './def_img.jpg'
 
 export class News extends Component {
     urlBase = "https://newsapi.org/"
@@ -18,9 +19,14 @@ export class News extends Component {
         category: PropTypes.string,
     }
 
+    capitaliseFirstLEtter = (str)=>{
+        console.log(str)
+        console.log(str.charAt(0).toUpperCase() + str.slice(1))
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         console.log("Hello constructor from new component")
         this.state = {
             articles : [],
@@ -28,6 +34,7 @@ export class News extends Component {
             page: 1,
             
         }
+        document.title = `${this.capitaliseFirstLEtter(this.props.category)} - NewsMonkey`;
     }
 
     updateNews(){(async()=>{
@@ -95,12 +102,12 @@ export class News extends Component {
         console.log('render...')
         return (
             <div className="container my-3">
-                <h1 className="text-center" style={{margin: '40px 0px'}}>News Monkey - Top Headlines</h1>
+                <h1 className="text-center" style={{margin: '40px 0px'}}>News Monkey - Top {this.capitaliseFirstLEtter(this.props.category)} Headlines</h1>
                 {this.state.loading && <Spinner/>}
                 <div className="row"> 
                 {!this.state.loading && this.state.articles.map((element)=>{
                     return <div key={element.url} className="col-md-4">
-                    <NewsItem  title={element.title?element.title.slice(0,50):""} description={element.description?element.description.slice(0,60):""} imageUrl = {element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name}/>
+                    <NewsItem  title={element.title?element.title.slice(0,50):""} description={element.description?element.description.slice(0,60):""} imageUrl = {element.urlToImage?element.urlToImage:def_img} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name}/>
                 </div>
                 })}
                 
